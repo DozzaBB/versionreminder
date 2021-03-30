@@ -1,0 +1,15 @@
+#!/bin/bash
+
+SRC_PATTERN="front-end"
+if git diff --cached --name-only | grep --quiet "$SRC_PATTERN"
+then
+  py ./.git/hooks/versionupdate.py front-end
+  git add ./front-end/package.json
+fi
+
+SRC_PATTERN="server"
+if git diff --cached --name-only | grep --quiet "$SRC_PATTERN"
+then
+  py ./.git/hooks/versionupdate.py server
+  git add ./server/package.json
+fi
